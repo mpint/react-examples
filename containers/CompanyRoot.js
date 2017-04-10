@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { actions } from '~/modules/common/state/companyInformation.ducks';
 
 class CompanyRoot extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
 
   componentWillMount = () => {
@@ -29,7 +29,9 @@ class CompanyRoot extends Component {
 
   render () {
     return (
-      <div> { this.props.children } </div>
+      <div>
+        { this.props.children }
+      </div>
     );
   }
 }

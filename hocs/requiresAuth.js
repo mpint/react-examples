@@ -33,14 +33,18 @@ function requiresAuth(ComposedComponent) {
     }
 
     render() {
-      return (
+      const renderAuthenticated = () => (
         <div className="authenticated">
-          { this.props.authState.isLoggedIn && !this.props.authState.access.hasGroup ?
-              <NoGroupPage /> :
-                this.props.authState.isLoggedIn && !this.props.authState.access.hasMultifactor ?
-                <NoMultifactorPage /> :
-                <ComposedComponent { ...this.props } />
+          { !this.props.authState.access.hasGroup ? <NoGroupPage /> :
+              !this.props.authState.access.hasMultifactor ? <NoMultifactorPage /> :
+              <ComposedComponent { ...this.props } />
           }
+        </div>
+      );
+
+      return (
+        <div>
+          { this.props.authState.isLoggedIn ? renderAuthenticated() : null }
         </div>
       );
     }

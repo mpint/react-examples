@@ -20,7 +20,8 @@ const Messagebox = (props, context) => {
     backgroundColor: props.hideColor ? 'none' :
       props.type === 'success' ? success :
       props.type === 'warning' ? warning :
-      props.type === 'error' ? error : info
+      props.type === 'error' ? error :
+      info
   };
 
   const iconStyles = {
@@ -36,19 +37,25 @@ const Messagebox = (props, context) => {
     );
   };
 
-  const content = (text) => {
+  const messageboxContent = (text) => {
     return (
       <span>
-        { !props.hideIcon && <span style={ iconStyles }> { getIcon(props.type) } </span> }
+        { !props.hideIcon &&
+            <span style={ iconStyles }> { getIcon(props.type) } </span>
+        }
         <span> { props.text } </span>
       </span>
     );
   };
 
+  const renderRaisedMessagebox = () => (<Paper style={ { ...messageBoxStyles, ...props.style } } zDepth={ 1 }> { messageboxContent() } </Paper>);
+  const renderNormalMessagebox = () => (<div style={ { ...messageBoxStyles, ...props.style } }> { messageboxContent() } </div>);
+  const renderPlaceholder = () => (<div style={ { ...placeholderStyles, ...props.style } } />);
+
   return (
-    props.text && props.isRaised ? <Paper style={ { ...messageBoxStyles, ...props.style } } zDepth={ 1 }> { content() } </Paper> :
-    props.text && !props.isRaised ? <div style={ { ...messageBoxStyles, ...props.style } }> { content() } </div> :
-    <div style={ { ...placeholderStyles, ...props.style } } />
+    props.text && props.isRaised ? renderRaisedMessagebox() :
+    props.text && !props.isRaised ? renderNormalMessagebox() :
+    renderPlaceholder()
   );
 };
 

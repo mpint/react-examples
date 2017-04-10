@@ -19,7 +19,9 @@ class ValidatorPage extends Component {
     };
   }
   componentWillMount = () => {
-    this.props.params.tabSlug && this.resolveTab(this.props.params.tabSlug);
+    if (this.props.params.tabSlug) {
+      this.resolveTab(this.props.params.tabSlug);
+    }
   }
 
   resolveTab = (currentTab) => {

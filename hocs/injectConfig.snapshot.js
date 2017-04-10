@@ -9,11 +9,11 @@ import EmptyComponent from '../../components/EmptyComponent';
 describe('injectConfig', function() {
 
   it('should render', function() {
-    const Thing = injectConfig(EmptyComponent);
+    const BasicComponent = injectConfig(EmptyComponent);
 
     const component = renderer.create(
       <ConfiguredProvider>
-        <Thing/>
+        <BasicComponent/>
       </ConfiguredProvider>
     );
 
